@@ -14,7 +14,9 @@ pipeline {
 
         stage('Stop Service') {
             steps {
-                bat "nssm stop Eureka"
+                bat "net stop Eureka"
+                sleep time: 10, unit: 'SECONDS'
+             	bat 'sc query Eureka | find "STATE" | find "STOPPED" && echo "Service stopped"'  
             }
         }
 
@@ -23,11 +25,10 @@ pipeline {
                 bat "copy /Y target\\Eureka.jar G:\\HRMS_API\\Eureka"
             }
         }
-
-        stage('Run Service') {
-            steps {            
-                bat "nssm start Eureka"
-            }
+    }
+    post {
+        always {
+           bat "nssm start Eureka"
         }
     }
 }
