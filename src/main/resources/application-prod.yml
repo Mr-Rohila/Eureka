@@ -10,7 +10,8 @@ eureka:
 
 logging:
   file:
-    name: G:\HRMS_API\Attendance\app.log
+    name: G:\HRMS_API\Eureka\app.log
   level:
     '[com.netflix.eureka]': debug
     '[com.netflix.discovery]': debug
+    
